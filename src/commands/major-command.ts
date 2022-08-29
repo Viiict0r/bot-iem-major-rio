@@ -33,6 +33,6 @@ export class MajorCommand {
           console.error(error)
         }
       }, 120 * 1000)
-    }).catch(() => null)
+    }).catch((err) => console.error(err))
   }
 }
