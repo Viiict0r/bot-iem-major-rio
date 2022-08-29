@@ -7,6 +7,7 @@ import './commands/register'
 import { MajorCommand } from './commands/major-command'
 import { getTimeLeft } from './utils/major-date'
 import { GiphyService } from './utils/giphy'
+import { ChatNotifyJob } from './jobs/chat-notify-job'
 
 const TOKEN = process.env.BOT_TOKEN
 const client = new Client({ intents: [ GatewayIntentBits.Guilds ] })
@@ -36,14 +37,16 @@ client.once('ready', () => {
       ]
     })
   }, 60 * 1000) // Update presence every 1 minute
+
+  new ChatNotifyJob(client, giphy_service).start()
 })
 
-client.on('interactionCreate', async interaction => {
+client.on('interactionCreate', async (interaction) => {
   if (!interaction.isChatInputCommand()) return
 
   switch(interaction.commandName) {
     case 'major':
-      await new MajorCommand(giphy_service).execute(interaction)
+      new MajorCommand(giphy_service).execute(interaction).then(() => null).catch((err) => console.error(err))
     default:
       break
   }

@@ -22,8 +22,17 @@ export class MajorCommand {
       .setDescription(distance)
       .setColor('#030303')
 
-    await interaction.reply({
+    interaction.reply({
       embeds: [gift],
-    })
+    }).then((message: any) => {
+      // Delete reply message after 2 minutes
+      setTimeout(() => {
+        try {
+          message.interaction.deleteReply()
+        } catch (error) {
+          console.error(error)
+        }
+      }, 120 * 1000)
+    }).catch(() => null)
   }
 }
