@@ -25,8 +25,8 @@ export class ChatNotifyJob {
 
         const timeFormatted = getTimeLeft()
 
-        const distance = `Faltam ${timeFormatted}.`
-        const randomGif = await giphy_service.getRandom()
+        const distance = timeFormatted.includes('0 dia') ? `${timeFormatted}...` : `Faltam ${timeFormatted}.`
+        const randomGif = await giphy_service.getRandom(timeFormatted.includes('0 dia'))
         const gift = new EmbedBuilder({
           image: {
             url: randomGif

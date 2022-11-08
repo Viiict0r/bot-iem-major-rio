@@ -1,6 +1,6 @@
 import { setMinutes, setHours, setYear, setMonth, setDate, differenceInDays, differenceInHours, subDays, differenceInMinutes, subHours } from "date-fns";
 
-export const EVENT_DATE = setMinutes(setHours(setYear(setMonth(setDate(new Date(), 10), 10), 2022), 0), 0)
+export const EVENT_DATE = setMinutes(setHours(setYear(setMonth(setDate(new Date(), 9), 10), 2022), 0), 0)
 
 export function getTimeLeft() {
   const days = differenceInDays(EVENT_DATE, new Date())

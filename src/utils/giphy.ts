@@ -20,7 +20,9 @@ export class GiphyService {
 
   private fetched_gifs: string[] = []
 
-  public async getRandom() {
+  public async getRandom(final?: boolean) {
+    if (final) return 'https://media0.giphy.com/media/3o6nUN1sHVfSgjCj72/giphy.gif?cid=790b7611838e26f290d1c821ad61ad8acd68eb343b303f3c&rid=giphy.gif&ct=g'
+
     let final_gif_url = ''
 
     try {
