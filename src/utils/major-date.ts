@@ -7,6 +7,10 @@ export function getTimeLeft() {
   const hours = differenceInHours(subDays(EVENT_DATE, days), new Date())
   const minutes = differenceInMinutes(subHours(subDays(EVENT_DATE, days), hours), new Date())
 
+  if (EVENT_DATE < new Date()) {
+    return '¯\_(ツ)_/¯'
+  }
+
   const formatted = `${days} dia${days > 1 ? 's' : ''}, ${hours} hora${hours > 1 ? 's' : ''} e ${minutes} minuto${minutes > 1 ? 's' : ''}`
 
   return formatted

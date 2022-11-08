@@ -11,6 +11,23 @@ export class MajorCommand {
   public async execute(interaction: ChatInputCommandInteraction<CacheType>) {
     const timeFormatted = getTimeLeft()
 
+    if (timeFormatted === '¯\_(ツ)_/¯') {
+      interaction.reply({
+        content: ''
+      }).then((message: any) => {
+        // Delete reply message after 2 minutes
+        setTimeout(() => {
+          try {
+            message.interaction.deleteReply()
+          } catch (error) {
+            console.error(error)
+          }
+        }, 120 * 1000)
+      }).catch((err) => console.error(err))
+
+      return
+    }
+
     const distance = timeFormatted.includes('0 dia') ? `${timeFormatted}...` : `Faltam ${timeFormatted}.`
     const randomGif = await this.giphy_service.getRandom(timeFormatted.includes('0 dia'))
     const gift = new EmbedBuilder({

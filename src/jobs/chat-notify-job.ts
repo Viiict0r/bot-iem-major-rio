@@ -24,6 +24,11 @@ export class ChatNotifyJob {
         const chat_id = process.env.CHAT_ID
 
         const timeFormatted = getTimeLeft()
+        const chat = client.channels.cache.get(chat_id)
+
+        if (timeFormatted === '¯\_(ツ)_/¯ ') {
+          return
+        }
 
         const distance = timeFormatted.includes('0 dia') ? `${timeFormatted}...` : `Faltam ${timeFormatted}.`
         const randomGif = await giphy_service.getRandom(timeFormatted.includes('0 dia'))
@@ -36,7 +41,6 @@ export class ChatNotifyJob {
           .setDescription(distance)
           .setColor('#030303')
 
-        const chat = client.channels.cache.get(chat_id)
 
         chat.send({
           embeds: [gift],
